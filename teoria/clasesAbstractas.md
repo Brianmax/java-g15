@@ -1,15 +1,11 @@
-# Clases abstractas en Java
+# Clases Abstractas en Java
 
-Una clase abstracta es una clase que no puede ser instanciada y que puede contener métodos abstractos. Los métodos abstractos son métodos que no tienen implementación y deben ser implementados por las subclases. Una clase abstracta puede contener métodos concretos, métodos abstractos, atributos y constructores.
+Clase que no puede instanciarse directamente y puede contener métodos abstractos (sin implementación).
 
-## Definición de una Clase Abstracta
-
-Una clase abstracta en Java es una clase que es declarada con la palabra clave `abstract`. Una clase abstracta puede contener métodos abstractos y métodos concretos.
+## Definición
 
 ```java
-
 public abstract class Figura {
-
     private String color;
 
     public Figura(String color) {
@@ -20,24 +16,22 @@ public abstract class Figura {
         return color;
     }
 
+    // métodos abstractos: las subclases DEBEN implementarlos
     public abstract double calcularArea();
-
     public abstract double calcularPerimetro();
 }
 ```
 
-## Implementación de una Clase Abstracta
+## Herencia
 
-Una clase puede extender una sola clase abstracta. En otras palabras una clase solo puede tener un padre. Para extender una clase abstracta, la subclase debe proporcionar implementaciones para todos los métodos abstractos definidos en la clase abstracta. La implementación se realiza utilizando la palabra clave `extends`.
+Se usa `extends`. Una clase solo puede heredar de una clase abstracta.
 
 ```java
-
 public class Circulo extends Figura {
-
     private double radio;
 
     public Circulo(String color, double radio) {
-        super(color);
+        super(color);  // llama al constructor del padre
         this.radio = radio;
     }
 
@@ -54,11 +48,8 @@ public class Circulo extends Figura {
 ```
 
 ```java
-
 public class Rectangulo extends Figura {
-
-    private double base;
-    private double altura;
+    private double base, altura;
 
     public Rectangulo(String color, double base, double altura) {
         super(color);
@@ -78,33 +69,31 @@ public class Rectangulo extends Figura {
 }
 ```
 
-## Variables de tipo de Clase Abstracta
+## Polimorfismo
 
-Una variable de tipo de una clase abstracta puede almacenar una referencia a un objeto de una subclase de la clase abstracta. Por ejemplo, una variable de tipo `Figura` puede almacenar una referencia a un objeto de tipo `Circulo` o `Rectangulo`.
-
-```java
-
-Circulo circulo = new Circulo("rojo", 5);
-
-```
-
-En este ejemplo podemos ver que declaramos una variable de tipo `Circulo` y la inicializamos con un objeto de tipo `Circulo`.
+Variable de tipo padre puede referenciar objetos hijos:
 
 ```java
+Figura f1 = new Circulo("rojo", 5);
+Figura f2 = new Rectangulo("azul", 4, 3);
 
-Figura figura = new Circulo("rojo", 5);
-
+f1.calcularArea();  // usa implementación de Circulo
+f2.calcularArea();  // usa implementación de Rectangulo
 ```
 
-En este ejemplo podemos ver que declaramos una variable de tipo `Figura` y la inicializamos con un objeto de tipo `Circulo`. Esto es posible porque `Circulo` es una subclase de `Figura`.
-
-La desventaja de usar una variable de tipo de clase abstracta es que solo podemos acceder a los métodos y atributos de la clase abstracta. Si queremos acceder a los métodos y atributos de la subclase, necesitamos hacer un *casting*.
+Para acceder a métodos específicos de la subclase, usar casting:
 
 ```java
-
-Figura figura = new Circulo("rojo", 5);
-Circulo circulo = (Circulo) figura;
-
+Circulo c = (Circulo) f1;
 ```
 
-En este ejemplo podemos ver que declaramos una variable de tipo `Figura` y la inicializamos con un objeto de tipo `Circulo`. Luego hacemos un *casting* para convertir la variable de tipo `Figura` a una variable de tipo `Circulo`.
+## Interfaz vs Clase Abstracta
+
+| Interfaz | Clase Abstracta |
+|----------|-----------------|
+| `implements` | `extends` |
+| Múltiples interfaces | Solo una clase padre |
+| Solo métodos abstractos* | Métodos concretos y abstractos |
+| Sin constructor | Puede tener constructor |
+
+*Java 8+ permite métodos default en interfaces.

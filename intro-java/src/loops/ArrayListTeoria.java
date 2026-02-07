@@ -1,6 +1,7 @@
 package loops;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ public class ArrayListTeoria {
         int n = sc.nextInt();
 
         for(int i = 0; i < n; i++) {
-            numeros.add(random.nextInt(0,100));
+            numeros.add(random.nextInt(0,100)); // agregamos un elemento al array con add
         }
         System.out.println("=============Array Inicial===================");
         System.out.println(numeros);
@@ -22,9 +23,12 @@ public class ArrayListTeoria {
         int r = sc.nextInt();
         for(int i = 0; i < r; i++) {
             int indice = random.nextInt(0, numeros.size()-1);
-            numeros.remove(indice);
+            numeros.remove(indice); // eliminamos un elemento del array usando un indice
         }
         System.out.println("=============Array Final===================");
         System.out.println(numeros);
+
+        // ejemplo: Obtener la posicion 1 de un arrayList
+        numeros.get(1333); // array[1]
     }
 }

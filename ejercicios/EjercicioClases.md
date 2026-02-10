@@ -6,9 +6,7 @@ Crear una clase `Dog` con los siguientes atributos:
 - `age` de tipo `int`
 - `color` de tipo `String`
 
-Crear un constructor que reciba los tres atributos y los asigne a los atributos de la clase.
-
-Crear una clase `Main` con un método `main` que cree un objeto de tipo `Dog` e imprima sus atributos.
+Crear una clase `Main` con un método `main` que cree un objeto de tipo `Dog`.
 
 ## Ejercicio 2
 

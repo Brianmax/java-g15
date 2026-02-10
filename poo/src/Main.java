@@ -1,3 +1,4 @@
+import pooTeoria.Computer;
 import pooTeoria.Usuario;
 
 public class Main {
@@ -11,5 +12,10 @@ public class Main {
 
         usuario2.username = "fiore12";
         usuario2.edad = 30;
+
+        Computer computer1 = new Computer("Apple", "Macbook", 16, 444);
+        computer1.brand = "Lenovo";
+        computer1.model = "LNV-2323";
+
     }
 }

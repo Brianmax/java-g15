@@ -9,6 +9,9 @@ public class Prueba {
 //        computer.model = "HP 01919";
 
         Computer computer = new Computer("Lenovo", "LNV", 4, 555);
+        Usuario usuario = new Usuario();
+        usuario.username = "georoeo";
+        usuario.email = "gekl@jkdkj.com";
 
     }
 }

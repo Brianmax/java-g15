@@ -7,15 +7,23 @@ public class Main {
         Usuario usuario1 = new Usuario();
         Usuario usuario2 = new Usuario();
 
-        usuario1.username = "george123";
+//        usuario1.username = "george123";
         usuario1.edad = 29;
 
-        usuario2.username = "fiore12";
+//        usuario2.username = "fiore12";
         usuario2.edad = 30;
 
         Computer computer1 = new Computer("Apple", "Macbook", 16, 444);
         computer1.brand = "Lenovo";
         computer1.model = "LNV-2323";
+
+        Usuario usuario3 = new Usuario("george2133", "george@gmail.com");
+        Usuario usuario4 = new Usuario("brian23232", "birai@jdjjd.com", 22, "M", "Peru");
+        Usuario usuario5 = new Usuario("jose", "jdslkfjalsd@gmail.com");
+
+
+        System.out.println(usuario3);
+
 
     }
 }

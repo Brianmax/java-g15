@@ -12,13 +12,12 @@ public class Main {
         // Una variable de la superclase, puede almacenar la referencia a un objeto de la subclase
         Persona profesor = new Profesor("George", "Maxi", 19, "george@gmail.com", 3333);
         Persona alumno1 = new Alumno("Rafael", "David", 33, "rafa@gmail.com", 18);
+        Persona persona = new Persona();
 //        Profesor profesor = new Persona(); X (incorrecto)
 
         profesor.printInfo();
         System.out.println("============================");
         alumno1.printInfo();
-
-
 
     }
 }

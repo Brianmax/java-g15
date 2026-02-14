@@ -2,8 +2,8 @@ package Ejercicio4;
 
 public abstract class LibraryItem {
     private String title;
-    private int itemID;
-    private boolean isLoaned;
+    private int itemID; // unico
+    private boolean isLoaned; // estaPrestado? true (no disponible) false (disponible)
 
     public LibraryItem(String title, int itemID) {
         this.title = title;

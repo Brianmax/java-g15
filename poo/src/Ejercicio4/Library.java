@@ -1,6 +1,7 @@
 package Ejercicio4;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Library {
     private ArrayList<LibraryItem> items;

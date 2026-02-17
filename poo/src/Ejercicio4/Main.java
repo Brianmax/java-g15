@@ -1,5 +1,7 @@
 package Ejercicio4;
 
+import java.util.HashMap;
+
 public class Main {
     public static void main(String[] args) {
         Library library = new Library();
@@ -41,12 +43,16 @@ public class Main {
 
 
 
-
-
-
-
-
         library.loanItem(19, "U-34");
         library.showAllItems(false);
+        // dado un id de un item
+        // quiero saber si esta prestado
+        // y si esta prestado a que usuario le pertenece el prestamo
+
+//        new HashMap<Boolean, Float>().
+        // ingreso un itemId = 19
+        // verifica si esta prestado
+        // si esta prestado imprime la informacion del usuario al que le pertenece el prestamo
+        // HashMap<? <12, "Jorge">, <76, "Jose">,
     }
 }

@@ -1,6 +1,8 @@
 package interfaces;
 
-public class Auto implements Vehiculo{
+import java.util.List;
+
+public class Auto implements Vehiculo {
     @Override
     public void acelerar() {
         System.out.println("Acelerando desde un auto...");

@@ -9,7 +9,6 @@ select * from boletos;
 select * from aerolineas JOIN aviones ON aviones.id_aerolinea_fk = aerolineas.id_aerolinea;
 
 -- Lista de pasajeros con sus respectivos boletos
-
 select pasajeros.nombre, pasajeros.apellido, boletos.asiento from pasajeros JOIN boletos on boletos.id_pasajero_fk = pasajeros.id_pasajero;
 
 -- Lista de aerolineaas sin aviones y con aviones (left join)
@@ -27,3 +26,12 @@ select * from vuelos;
 select pasajeros.nombre, pasajeros.apellido, boletos.asiento, vuelos.destino from pasajeros 
 JOIN boletos on boletos.id_pasajero_fk = pasajeros.id_pasajero 
 JOIN vuelos on vuelos.id_vuelo = boletos.id_vuelo_fk;
+
+-- traer el piloto con sus respectivos vuelos
+-- mostrar los pilotos que no tienen ningun vuelo asignado
+
+select * from aerolineas;
+
+delete from aerolineas where id_aerolinea = 1;
+
+

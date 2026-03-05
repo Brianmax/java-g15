@@ -1,0 +1,66 @@
+use('mongdb1');
+db.createCollection('usuarios');
+
+
+use('mongdb1');
+db.usuarios.insertOne({
+    nombre: 'Juan',
+    edad: 30,
+    correo: 'juan@gmail.com',
+    intereses: ['programación', 'viajes']
+})
+
+use('mongdb1');
+db.usuarios.insertMany(
+    [
+        {
+            nombre: 'María',
+            edad: 25,
+            correo: 'maria@gmail.com',
+            intereses: ['diseño', 'fotografía']
+        },
+        {
+            nombre: 'Carlos',
+            edad: 35,
+            correo: 'carlos@gmail.com',
+            intereses: ['deportes', 'música']
+        },
+        {
+            nombre: 'Ana',
+            apellido: 'García',
+            edad: 28,
+            correo: 'ana@gmail.com',
+            intereses: ['cocina', 'lectura']
+        }
+    ]
+)
+
+// operadores gt (mayor que) y lt (menor que), gte (mayor o igual que), lte (menor o igual que)
+
+
+
+use('mongdb1');
+db.usuarios.find();
+
+use('mongdb1');
+db.usuarios.find(
+    {
+        edad: { $gte: 30 }
+    }
+);
+
+// operador set para actualizar un documento
+
+use('mongdb1');
+db.usuarios.updateOne(
+    // filtro
+    {
+        correo: 'juan@gmail.com'
+    },
+    // actualización
+    {
+        $set: {
+            edad: 40
+        }
+    }
+);

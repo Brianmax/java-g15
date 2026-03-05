@@ -1,0 +1,209 @@
+use('mongdb1');
+db.universidad.insertOne({
+    nombre: 'UNMSM',
+    ubicacion: 'Lima',
+    facultades: ['Ingeniería', 'Medicina', 'Derecho'],
+    alumnos: 7000,
+    direccion: {
+        calle: 'Av. Universitaria',
+        numero: 1234,
+        ciudad: 'Lima',
+        pais: 'Perú'
+    },
+    presupuesto: 5000000
+})
+
+
+use('mongdb1');
+db.universidad.insertMany([
+  {
+    nombre: 'PUCP',
+    ubicacion: 'Lima',
+    facultades: ['Ingeniería', 'Arquitectura', 'Ciencias Sociales'],
+    alumnos: 12000,
+    direccion: {
+      calle: 'Av. Universitaria',
+      numero: 1801,
+      ciudad: 'Lima',
+      pais: 'Perú'
+    },
+    presupuesto: 8000000
+  },
+  {
+    nombre: 'UNI',
+    ubicacion: 'Lima',
+    facultades: ['Ingeniería Civil', 'Ingeniería Mecánica', 'Ingeniería Eléctrica'],
+    alumnos: 9500,
+    direccion: {
+      calle: 'Av. Túpac Amaru',
+      numero: 210,
+      ciudad: 'Lima',
+      pais: 'Perú'
+    },
+    presupuesto: 6000000
+  },
+  {
+    nombre: 'UNSA',
+    ubicacion: 'Arequipa',
+    facultades: ['Medicina', 'Derecho', 'Contabilidad'],
+    alumnos: 8500,
+    direccion: {
+      calle: 'Av. Independencia',
+      numero: 107,
+      ciudad: 'Arequipa',
+      pais: 'Perú'
+    },
+    presupuesto: 4500000
+  },
+  {
+    nombre: 'UNT',
+    ubicacion: 'Trujillo',
+    facultades: ['Ingeniería Industrial', 'Educación', 'Enfermería'],
+    alumnos: 7800,
+    direccion: {
+      calle: 'Av. Juan Pablo II',
+      numero: 555,
+      ciudad: 'Trujillo',
+      pais: 'Perú'
+    },
+    presupuesto: 4000000
+  },
+  {
+    nombre: 'UNFV',
+    ubicacion: 'Lima',
+    facultades: ['Derecho', 'Psicología', 'Ingeniería de Sistemas'],
+    alumnos: 6700,
+    direccion: {
+      calle: 'Av. Nicolás de Piérola',
+      numero: 351,
+      ciudad: 'Lima',
+      pais: 'Perú'
+    },
+    presupuesto: 3500000
+  },
+  {
+    nombre: 'UNCP',
+    ubicacion: 'Huancayo',
+    facultades: ['Agronomía', 'Ingeniería Forestal', 'Zootecnia'],
+    alumnos: 5200,
+    direccion: {
+      calle: 'Av. Mariscal Castilla',
+      numero: 3909,
+      ciudad: 'Huancayo',
+      pais: 'Perú'
+    },
+    presupuesto: 2800000
+  },
+  {
+    nombre: 'UNPRG',
+    ubicacion: 'Lambayeque',
+    facultades: ['Medicina', 'Ingeniería Química', 'Administración'],
+    alumnos: 6100,
+    direccion: {
+      calle: 'Av. Juan XXIII',
+      numero: 391,
+      ciudad: 'Chiclayo',
+      pais: 'Perú'
+    },
+    presupuesto: 3200000
+  },
+  {
+    nombre: 'UNP',
+    ubicacion: 'Piura',
+    facultades: ['Economía', 'Ingeniería Informática', 'Educación'],
+    alumnos: 7300,
+    direccion: {
+      calle: 'Av. Sánchez Cerro',
+      numero: 295,
+      ciudad: 'Piura',
+      pais: 'Perú'
+    },
+    presupuesto: 3700000
+  },
+  {
+    nombre: 'UNAP',
+    ubicacion: 'Iquitos',
+    facultades: ['Biología', 'Ingeniería Ambiental', 'Enfermería'],
+    alumnos: 4800,
+    direccion: {
+      calle: 'Av. Grau',
+      numero: 122,
+      ciudad: 'Iquitos',
+      pais: 'Perú'
+    },
+    presupuesto: 2500000
+  },
+  {
+    nombre: 'UNJBG',
+    ubicacion: 'Tacna',
+    facultades: ['Ingeniería de Minas', 'Contabilidad', 'Derecho'],
+    alumnos: 4300,
+    direccion: {
+      calle: 'Av. Miraflores',
+      numero: 350,
+      ciudad: 'Tacna',
+      pais: 'Perú'
+    },
+    presupuesto: 2300000
+  }
+])
+
+use('mongdb1');
+db.universidad.insertOne(
+    {
+    nombre: 1,
+    ubicacion: 'Tacna',
+    facultades: ['Ingeniería de Minas', 'Contabilidad', 'Derecho'],
+    alumnos: 4300,
+    direccion: {
+      calle: 'Av. Miraflores',
+      numero: 350,
+      ciudad: 'Tacna',
+      pais: 'Perú'
+    },
+    presupuesto: 2300000
+  }
+)
+
+// operador and
+// traer a todas las universidades que tengan más de 5000 alumnos y un presupuesto mayor a 3000000
+use('mongdb1');
+db.universidad.find(
+    {
+        alumnos: { $gt: 5000 },
+        presupuesto: { $gt: 3000000 }
+    }
+)
+
+use('mongdb1');
+db.universidad.find(
+    {
+        $and: [
+            { alumnos: { $gt: 5000 } },
+            { presupuesto: { $gt: 3000000 } }
+        ]
+    }
+)
+
+// operador or
+// traer a todas las universidades que tengan más de 5000 alumnos o un presupuesto mayor a 3000000
+use('mongdb1');
+db.universidad.find(
+    {
+        $or: [
+            { alumnos: { $gt: 5000 } },
+            { presupuesto: { $gt: 3000000 } }
+        ]
+    }
+)
+
+// and y or juntos
+// traer todos los documentos donde el numero de alumnos sea menor que 10k
+// o el presupuesto supere o sea igual a 4M, pero ademas la universidad debe estar ubicada en Lima
+
+use('mongdb1');
+db.universidad.find(
+    {
+        "direccion.ciudad": "Lima",
+    }
+);

@@ -1,0 +1,110 @@
+use('mongdb1');
+db.createCollection('users', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            properties: {
+                nombre: {
+                    bsonType: 'string',
+                },
+                edad: {
+                    bsonType: 'int',
+                },
+                correo: {
+                    bsonType: 'string',
+                },
+                intereses: {
+                    bsonType: 'array',
+                    items: {
+                        bsonType: 'string',
+                    }
+                },
+                direccion: {
+                    bsonType: 'array',
+                    items: {
+                        bsonType: 'object',
+                        properties: {
+                            calle: {
+                                bsonType: 'string',
+                            },
+                            numero: {
+                                bsonType: 'int',
+                            },
+                            ciudad: {
+                                bsonType: 'string',
+                            },
+                            pais: {
+                                bsonType: 'string',
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+})
+
+
+use('mongdb1');
+db.users.insertOne({
+    nombre: 23,
+    edad: 40,
+    correo: 'pedro@example.com',
+    intereses: ['leer', 'viajar'],
+    direccion: [{
+        calle: 'Calle Falsa',
+        numero: 123,
+        ciudad: 'Madrid',
+        pais: 'España'
+    }]
+})
+
+
+use('sample_training');
+db.grades.find(
+    {
+        class_id: 350
+    }
+);
+
+// promedio de puntaje por clase
+
+use('sample_training');
+db.grades.aggregate([
+    {
+        $unwind: "$scores"
+    },
+    {
+        $group: {
+            _id: "$class_id",
+            promedio: { $avg: "$scores.score" }
+        }
+    },
+    {
+        $sort: {
+          promedio: -1
+        }
+    }
+]
+);
+
+use('sample_training');
+db.grades.find();
+
+// cantidad de estudiantes por clase ($sum)
+
+use('sample_training');
+db.grades.aggregate([
+    {
+        $group: {
+            _id: "$class_id",
+            cantidad_estudiantes: { $sum: 1 }
+        }
+    },
+    {
+        $sort: {
+            cantidad_estudiantes: -1
+        }
+    }
+]
+);

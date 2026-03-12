@@ -30,5 +30,5 @@ public class UsuarioEntity {
     private char sexo;
     private String dni;
     @Column(name = "num_comentarios")
-    private int numComentarios;
+    private int numComentarios = 0;
 }

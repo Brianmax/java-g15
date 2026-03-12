@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/usuario")
 public class UsuarioController {
-    private final UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
 
     public UsuarioController(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -19,3 +19,6 @@ public class UsuarioController {
         return usuarioRepository.save(usuarioPayload);
     }
 }
+
+
+// implementar la insercion de una categoria. Crear el repository y el controlador

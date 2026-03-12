@@ -1,12 +1,15 @@
 package com.example.api_rest.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "categorias")
 public class CategoriaEntity {
@@ -17,46 +20,11 @@ public class CategoriaEntity {
     private String descripcion;
     private double popularidad;
 
-
-    public CategoriaEntity() {
-    }
-
-    public CategoriaEntity(UUID id, String nombre, String descripcion, double popularidad) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.popularidad = popularidad;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public double getPopularidad() {
-        return popularidad;
-    }
-
-    public void setPopularidad(double popularidad) {
-        this.popularidad = popularidad;
-    }
+    @ManyToMany
+    @JoinTable(
+            name = "categoria_articulo",
+            joinColumns = @JoinColumn(name = "id_categoria_fk"),
+            inverseJoinColumns = @JoinColumn(name = "id_articulo_fk")
+    )
+    private ArrayList<ArticuloEntity> articulos;
 }

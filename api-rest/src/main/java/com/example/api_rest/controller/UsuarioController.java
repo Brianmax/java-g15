@@ -18,6 +18,10 @@ public class UsuarioController {
     public UsuarioEntity saveUsuario(@RequestBody UsuarioEntity usuarioPayload) {
         return usuarioRepository.save(usuarioPayload);
     }
+
+    // buscar usuarios por id
+    // actualizar un usuario
+    // buscar por nombre
 }
 
 

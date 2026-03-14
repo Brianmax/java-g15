@@ -1,7 +1,9 @@
 package com.example.api_rest.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ public class CategoriaEntity {
     private UUID id;
     private String nombre;
     private String descripcion;
-    private double popularidad;
+    private double popularidad = 0;
 
     @ManyToMany
     @JoinTable(

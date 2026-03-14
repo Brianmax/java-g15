@@ -1,20 +1,20 @@
-package com.example.api_rest.dto;
-import jakarta.persistence.Column;
+package com.example.api_rest.dto.request;
+
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.UUID;
 
 @Getter
 @Setter
-public class UsuarioResponseDto {
-    private UUID id;
+public class UsuarioCreateDto {
     private String descripcion;
     private String nombres;
     private String apellidos;
     private String username;
+    private String password;
     private String email;
     private Date fechaNacimiento;
-    private int numComentarios;
+    private char sexo;
+    private String dni;
 }

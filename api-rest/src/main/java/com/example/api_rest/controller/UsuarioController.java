@@ -1,9 +1,7 @@
 package com.example.api_rest.controller;
 
-import com.example.api_rest.dto.UsuarioCreateDto;
-import com.example.api_rest.dto.UsuarioResponseDto;
-import com.example.api_rest.entity.UsuarioEntity;
-import com.example.api_rest.repository.UsuarioRepository;
+import com.example.api_rest.dto.request.UsuarioCreateDto;
+import com.example.api_rest.dto.response.UsuarioResponseDto;
 import com.example.api_rest.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
 

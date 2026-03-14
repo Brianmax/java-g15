@@ -18,7 +18,6 @@ public class UsuarioController {
     @PostMapping("/save")
     public UsuarioEntity saveUsuario(@RequestBody UsuarioCreateDto usuarioCreateDto) {
         return usuarioService.saveUsuario(usuarioCreateDto);
-
     }
 
     // buscar usuarios por id

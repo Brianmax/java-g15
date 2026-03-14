@@ -31,4 +31,6 @@ public class UsuarioEntity {
     private String dni;
     @Column(name = "num_comentarios")
     private int numComentarios = 0;
+    private Date fechaCreacion;
+    private Date fechaActualizacion;
 }

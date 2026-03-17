@@ -22,4 +22,6 @@ public class ArticuloController {
     public ResponseArticuloDto createArticulo(@RequestBody CreateArticuloDto createArticuloDto) {
         return articuloService.createArticulo(createArticuloDto);
     }
+
+    // implementar la busqueda por id de un articulo
 }

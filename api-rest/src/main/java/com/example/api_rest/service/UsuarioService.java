@@ -4,6 +4,7 @@ import com.example.api_rest.dto.request.UsuarioCreateDto;
 import com.example.api_rest.dto.response.UsuarioResponseDto;
 import com.example.api_rest.entity.UsuarioEntity;
 import com.example.api_rest.repository.UsuarioRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.resource.ResourceUrlProvider;
 
@@ -14,11 +15,11 @@ import java.util.UUID;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
-    private final ResourceUrlProvider resourceUrlProvider;
+    private final ModelMapper modelMapper;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, ResourceUrlProvider resourceUrlProvider) {
+    public UsuarioService(UsuarioRepository usuarioRepository, ModelMapper modelMapper) {
         this.usuarioRepository = usuarioRepository;
-        this.resourceUrlProvider = resourceUrlProvider;
+        this.modelMapper = modelMapper;
     }
 
     public UsuarioResponseDto saveUsuario(UsuarioCreateDto usuario) {
@@ -28,31 +29,18 @@ public class UsuarioService {
         // validar email
         // password mas de 8 digitos, un caracter numerico y una mayuscula
         // verificar dni
-        String nombres = usuario.getNombres().toUpperCase();
-        String apellido = usuario.getApellidos().toUpperCase();
+        usuario.setNombres(usuario.getNombres().toUpperCase());
+        usuario.setApellidos(usuario.getApellidos().toUpperCase());
         // una vez las reglas se cumplen
 
+        // de usuario create dto ---> Usuario entity
         UsuarioEntity usuarioEntity = new UsuarioEntity();
-        usuarioEntity.setNombres(nombres);
-        usuarioEntity.setApellidos(apellido);
-        usuarioEntity.setDescripcion(usuario.getDescripcion());
-        usuarioEntity.setUsername(usuario.getUsername());
-        usuarioEntity.setPassword(usuario.getPassword());
-        usuarioEntity.setEmail(usuario.getEmail());
-        usuarioEntity.setFechaNacimiento(usuario.getFechaNacimiento());
-        usuarioEntity.setSexo(usuario.getSexo());
-        usuarioEntity.setDni(usuario.getDni());
+        modelMapper.map(usuario, usuarioEntity);
         usuarioRepository.save(usuarioEntity);
 
+        // de usuario entity a ---> Usuario response dto
         UsuarioResponseDto usuarioResponseDto = new UsuarioResponseDto();
-        usuarioResponseDto.setId(usuarioEntity.getId());
-        usuarioResponseDto.setDescripcion(usuarioEntity.getDescripcion());
-        usuarioResponseDto.setNombres(usuarioEntity.getNombres());
-        usuarioResponseDto.setApellidos(usuarioEntity.getApellidos());
-        usuarioResponseDto.setUsername(usuarioEntity.getUsername());
-        usuarioResponseDto.setEmail(usuarioEntity.getEmail());
-        usuarioResponseDto.setFechaNacimiento(usuarioEntity.getFechaNacimiento());
-        usuarioResponseDto.setNumComentarios(usuarioEntity.getNumComentarios());
+        modelMapper.map(usuarioEntity, usuarioResponseDto);
         return usuarioResponseDto;
     }
 
@@ -62,6 +50,8 @@ public class UsuarioService {
         if(usuarioOptional.isEmpty()) {
             return null;
         }
+
+        // de usuario entity ---> Usuario response dto
         UsuarioEntity usuario = usuarioOptional.get();
         UsuarioResponseDto usuarioResponseDto = new UsuarioResponseDto();
         usuarioResponseDto.setId(usuario.getId());

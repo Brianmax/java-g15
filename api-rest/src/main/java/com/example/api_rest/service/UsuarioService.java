@@ -5,14 +5,20 @@ import com.example.api_rest.dto.response.UsuarioResponseDto;
 import com.example.api_rest.entity.UsuarioEntity;
 import com.example.api_rest.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.resource.ResourceUrlProvider;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final ResourceUrlProvider resourceUrlProvider;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, ResourceUrlProvider resourceUrlProvider) {
         this.usuarioRepository = usuarioRepository;
+        this.resourceUrlProvider = resourceUrlProvider;
     }
 
     public UsuarioResponseDto saveUsuario(UsuarioCreateDto usuario) {
@@ -47,6 +53,25 @@ public class UsuarioService {
         usuarioResponseDto.setEmail(usuarioEntity.getEmail());
         usuarioResponseDto.setFechaNacimiento(usuarioEntity.getFechaNacimiento());
         usuarioResponseDto.setNumComentarios(usuarioEntity.getNumComentarios());
+        return usuarioResponseDto;
+    }
+
+    public UsuarioResponseDto findById(UUID idUsuario) {
+        Optional<UsuarioEntity> usuarioOptional = usuarioRepository.findById(idUsuario);
+
+        if(usuarioOptional.isEmpty()) {
+            return null;
+        }
+        UsuarioEntity usuario = usuarioOptional.get();
+        UsuarioResponseDto usuarioResponseDto = new UsuarioResponseDto();
+        usuarioResponseDto.setId(usuario.getId());
+        usuarioResponseDto.setDescripcion(usuario.getDescripcion());
+        usuarioResponseDto.setNombres(usuario.getNombres());
+        usuarioResponseDto.setApellidos(usuario.getApellidos());
+        usuarioResponseDto.setUsername(usuario.getUsername());
+        usuarioResponseDto.setEmail(usuario.getEmail());
+        usuarioResponseDto.setFechaNacimiento(usuario.getFechaNacimiento());
+        usuarioResponseDto.setNumComentarios(usuario.getNumComentarios());
         return usuarioResponseDto;
     }
 }

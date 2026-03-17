@@ -43,6 +43,7 @@ public class ArticuloService {
         responseArticuloDto.setId(articuloEntity.getId());
         responseArticuloDto.setTitulo(articuloEntity.getTitulo());
         responseArticuloDto.setContenido(articuloEntity.getContenido());
+        responseArticuloDto.setUrl(articuloEntity.getUrl());
         return responseArticuloDto;
     }
 }

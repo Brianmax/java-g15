@@ -1,13 +1,17 @@
 package com.example.api_rest.service;
 
 import com.example.api_rest.dto.request.UsuarioCreateDto;
+import com.example.api_rest.dto.response.ResponseArticuloDto;
 import com.example.api_rest.dto.response.UsuarioResponseDto;
+import com.example.api_rest.entity.ArticuloEntity;
 import com.example.api_rest.entity.UsuarioEntity;
 import com.example.api_rest.repository.UsuarioRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.resource.ResourceUrlProvider;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -53,15 +57,18 @@ public class UsuarioService {
 
         // de usuario entity ---> Usuario response dto
         UsuarioEntity usuario = usuarioOptional.get();
+        List<ArticuloEntity> articulos = usuario.getArticulos();
+
+        List<ResponseArticuloDto> responseArticuloDtos
+                = articulos.stream().map(articuloEntity -> {
+                    ResponseArticuloDto responseArticuloDto = new ResponseArticuloDto();
+                    modelMapper.map(articuloEntity, responseArticuloDto);
+                    return responseArticuloDto;
+                }).toList();
+
         UsuarioResponseDto usuarioResponseDto = new UsuarioResponseDto();
-        usuarioResponseDto.setId(usuario.getId());
-        usuarioResponseDto.setDescripcion(usuario.getDescripcion());
-        usuarioResponseDto.setNombres(usuario.getNombres());
-        usuarioResponseDto.setApellidos(usuario.getApellidos());
-        usuarioResponseDto.setUsername(usuario.getUsername());
-        usuarioResponseDto.setEmail(usuario.getEmail());
-        usuarioResponseDto.setFechaNacimiento(usuario.getFechaNacimiento());
-        usuarioResponseDto.setNumComentarios(usuario.getNumComentarios());
+        modelMapper.map(usuario, usuarioResponseDto);
+        usuarioResponseDto.setArticulos(responseArticuloDtos);
         return usuarioResponseDto;
     }
 }

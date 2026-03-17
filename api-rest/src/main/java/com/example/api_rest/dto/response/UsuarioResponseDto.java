@@ -2,7 +2,9 @@ package com.example.api_rest.dto.response;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -16,4 +18,5 @@ public class UsuarioResponseDto {
     private String email;
     private Date fechaNacimiento;
     private int numComentarios;
+    private List<ResponseArticuloDto> articulos;
 }

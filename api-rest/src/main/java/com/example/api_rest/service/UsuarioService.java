@@ -1,6 +1,7 @@
 package com.example.api_rest.service;
 
 import com.example.api_rest.dto.request.UsuarioCreateDto;
+import com.example.api_rest.dto.response.ReniecResponse;
 import com.example.api_rest.dto.response.ResponseArticuloDto;
 import com.example.api_rest.dto.response.UsuarioResponseDto;
 import com.example.api_rest.entity.ArticuloEntity;
@@ -12,10 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.resource.ResourceUrlProvider;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class UsuarioService {
@@ -33,23 +31,25 @@ public class UsuarioService {
     }
 
     public UsuarioResponseDto saveUsuario(UsuarioCreateDto usuario) {
-        // guardar los nombres en mayusculas
-        // numero de comentarios a 0
-        // dni de 8 digitos
         // validar email
         // password mas de 8 digitos, un caracter numerico y una mayuscula
-        // verificar dni
         String dni = usuario.getDni();
         if(dni.length() != 8 || !dni.matches("^\\d+$")) {
             return null;
         }
+        ReniecResponse response = reniecClient.getPersonaInfo(dni, apiToken);
 
-        reniecClient.getPersonaInfo(dni, apiToken);
-
-
+        String username = response
+                .getFirstName()
+                .split("\\s+")[0]
+                .toLowerCase() + "." +
+                response.getFirstLastName().toLowerCase();
         // de usuario create dto ---> Usuario entity
         UsuarioEntity usuarioEntity = new UsuarioEntity();
         modelMapper.map(usuario, usuarioEntity);
+        usuarioEntity.setNombres(response.getFirstName());
+        usuarioEntity.setApellidos(response.getFirstLastName() + " " + response.getSecondLastName());
+        usuarioEntity.setUsername(username);
         usuarioRepository.save(usuarioEntity);
 
         // de usuario entity a ---> Usuario response dto

@@ -5,8 +5,10 @@ import com.example.api_rest.dto.response.ResponseArticuloDto;
 import com.example.api_rest.dto.response.UsuarioResponseDto;
 import com.example.api_rest.entity.ArticuloEntity;
 import com.example.api_rest.entity.UsuarioEntity;
+import com.example.api_rest.feignClient.ReniecClient;
 import com.example.api_rest.repository.UsuarioRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.resource.ResourceUrlProvider;
 
@@ -20,10 +22,14 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final ModelMapper modelMapper;
+    private final ReniecClient reniecClient;
+    @Value("${api.token}")
+    private String apiToken;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, ModelMapper modelMapper) {
+    public UsuarioService(UsuarioRepository usuarioRepository, ModelMapper modelMapper, ReniecClient reniecClient) {
         this.usuarioRepository = usuarioRepository;
         this.modelMapper = modelMapper;
+        this.reniecClient = reniecClient;
     }
 
     public UsuarioResponseDto saveUsuario(UsuarioCreateDto usuario) {
@@ -33,9 +39,13 @@ public class UsuarioService {
         // validar email
         // password mas de 8 digitos, un caracter numerico y una mayuscula
         // verificar dni
-        usuario.setNombres(usuario.getNombres().toUpperCase());
-        usuario.setApellidos(usuario.getApellidos().toUpperCase());
-        // una vez las reglas se cumplen
+        String dni = usuario.getDni();
+        if(dni.length() != 8 || !dni.matches("^\\d+$")) {
+            return null;
+        }
+
+        reniecClient.getPersonaInfo(dni, apiToken);
+
 
         // de usuario create dto ---> Usuario entity
         UsuarioEntity usuarioEntity = new UsuarioEntity();

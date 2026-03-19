@@ -12,3 +12,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+api:
+  token: sk_7214.nLbRrloUrvd7ruNs81vdFFh2TGLq0KFp

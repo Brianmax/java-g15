@@ -6,6 +6,8 @@ import com.example.api_rest.dto.response.ResponseArticuloDto;
 import com.example.api_rest.dto.response.UsuarioResponseDto;
 import com.example.api_rest.entity.ArticuloEntity;
 import com.example.api_rest.entity.UsuarioEntity;
+import com.example.api_rest.exception.ExternalResourceException;
+import com.example.api_rest.exception.ResourceNotFoundException;
 import com.example.api_rest.feignClient.ReniecClient;
 import com.example.api_rest.repository.UsuarioRepository;
 import org.modelmapper.ModelMapper;
@@ -61,8 +63,8 @@ public class UsuarioService {
     public UsuarioResponseDto findById(UUID idUsuario) {
         Optional<UsuarioEntity> usuarioOptional = usuarioRepository.findById(idUsuario);
 
-        if(usuarioOptional.isEmpty()) {
-            return null;
+        if(usuarioOptional.isEmpty()) { // usuario no encontrado
+            throw new ResourceNotFoundException("Usuario no encontrado");
         }
 
         // de usuario entity ---> Usuario response dto

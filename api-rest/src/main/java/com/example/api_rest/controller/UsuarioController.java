@@ -1,8 +1,11 @@
 package com.example.api_rest.controller;
 
 import com.example.api_rest.dto.request.UsuarioCreateDto;
+import com.example.api_rest.dto.response.ApiResponse;
 import com.example.api_rest.dto.response.UsuarioResponseDto;
 import com.example.api_rest.service.UsuarioService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -22,8 +25,9 @@ public class UsuarioController {
     }
 
     @GetMapping("/find/{id}")
-    public UsuarioResponseDto findById(@PathVariable UUID id) {
-        return usuarioService.findById(id);
+    public ResponseEntity<ApiResponse<UsuarioResponseDto>> findById(@PathVariable UUID id) {
+        UsuarioResponseDto response = usuarioService.findById(id);
+        return ResponseEntity.ok(new ApiResponse<UsuarioResponseDto>(true, "Usuario encontrado", response));
     }
 
     // buscar usuarios por id

@@ -164,19 +164,6 @@ Todos los endpoints deben retornar `ResponseEntity<ApiResponse<T>>` con el códi
 
 ---
 
-## Configuración adicional
-
-En `application.yaml`, agrega la URL base del servicio de SUNAT:
-
-```yaml
-sunat:
-  url: https://api.decolecta.com/v1/sunat
-```
-
-No olvides registrar el cliente Feign en `ApiRestApplication.java` dentro de la anotación `@EnableFeignClients`.
-
----
-
 ## Instrucciones Adicionales
 
 - Sigue la misma arquitectura en capas del proyecto: Controller → Service → Repository

@@ -10,6 +10,8 @@ Repositorio de aprendizaje de Java organizado por proyectos temáticos.
 | [poo](./poo) | Programación Orientada a Objetos | Clases, Objetos, Herencia, Clases Abstractas, Modificadores de Acceso, Polimorfismo |
 | [teoria](./teoria) | Guías teóricas de referencia | Variables, Condicionales, Loops, Arrays, POO, Clases Abstractas, Interfaces, Hash |
 | [ejercicios](./ejercicios) | Ejercicios prácticos por tema | Variables, Condicionales, Arrays, Loops, Clases |
+| [bases-datos](./bases-datos) | Consultas y diseño de bases de datos | PostgreSQL, Relaciones, Foreign Keys, JOINs, MongoDB, Aggregations, Operadores |
+| [api-rest](./api-rest) | API REST con Spring Boot | Spring Boot, Spring Data JPA, PostgreSQL, DTOs, Feign Client, Exception Handling, ModelMapper, RENIEC |
 
 ---
 
@@ -103,5 +105,56 @@ Ejercicios prácticos organizados por tema.
 - [Arrays y Loops](./ejercicios/EjerciciosArraysLoops.md)
 - [Clases](./ejercicios/EjercicioClases.md)
 - [Clases 2](./ejercicios/EjerciciosClases2.md)
+- [API Rest](./ejercicios/EjerciciosApiRest.md)
+
+---
+
+### bases-datos
+
+Ejemplos de consultas SQL y MongoDB para el manejo de bases de datos relacionales y no relacionales.
+
+**Temas incluidos:**
+
+- **PostgreSQL**
+  - Diseño de esquemas relacionales
+  - Restricciones: `FOREIGN KEY`, `ON DELETE CASCADE`, `ON DELETE SET NULL`, `ON DELETE SET DEFAULT`
+  - Consultas: `INNER JOIN`, `LEFT OUTER JOIN`
+
+- **MongoDB**
+  - Operaciones de colección: `insertOne`, `insertMany`, `find`, `updateOne`
+  - Validación de esquemas con JSON Schema
+  - Operadores: `$gt`, `$gte`, `$and`, `$or`
+  - Aggregation pipelines: `$unwind`, `$group`, `$avg`, `$sum`, `$sort`
+
+---
+
+### api-rest
+
+API REST construida con Spring Boot para gestión de usuarios, artículos y categorías, con integración al servicio externo RENIEC.
+
+**Temas incluidos:**
+
+- **Spring Boot**
+  - Arquitectura en capas: Controller → Service → Repository
+  - Anotaciones: `@RestController`, `@Service`, `@Repository`, `@Entity`
+
+- **Spring Data JPA**
+  - Entidades y relaciones (`@OneToMany`, `@ManyToOne`, `@ManyToMany`)
+  - Native queries con `@Query(nativeQuery = true)`
+
+- **DTOs y Mapeo**
+  - Separación de DTOs de request y response
+  - Mapeo con ModelMapper
+
+- **Feign Client**
+  - Integración con API externa (RENIEC) para consulta de DNI
+
+- **Manejo de Excepciones**
+  - `@RestControllerAdvice` con excepciones custom
+  - `ResourceNotFoundException` (404), `ExternalServiceException` (502)
+
+- **Diseño REST**
+  - Respuesta genérica `ApiResponse<T>`
+  - Códigos HTTP apropiados por operación
 
 ---

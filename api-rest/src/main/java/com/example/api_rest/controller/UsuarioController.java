@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -34,9 +35,12 @@ public class UsuarioController {
                 .body(new ApiResponse<>(true, "Usuario encontrado", response));
     }
 
-    // buscar usuarios por id
-    // actualizar un usuario
-    // buscar por nombre
+    @GetMapping("/find/nombre/{nombre}")
+    public ResponseEntity<ApiResponse<List<UsuarioResponseDto>>> findByNombre(@PathVariable String nombre) {
+        List<UsuarioResponseDto> response = usuarioService.findByNombre(nombre);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ApiResponse<>(true, "Usuarios encontrados", response));
+    }
 }
 
 

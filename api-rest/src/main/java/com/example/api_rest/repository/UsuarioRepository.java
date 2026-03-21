@@ -15,4 +15,7 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, UUID> {
 
     @Query(value = "select * from usuario where fecha_nacimiento = :fechaNacimiento", nativeQuery = true)
     List<UsuarioEntity> findByFechaNacimientoAfter(Date fechaNaciemiento);
+
+    @Query(value = "SELECT * FROM usuarios WHERE nombres ILIKE CONCAT('%', :nombre, '%')", nativeQuery = true)
+    List<UsuarioEntity> findByNombre(String nombre);
 }

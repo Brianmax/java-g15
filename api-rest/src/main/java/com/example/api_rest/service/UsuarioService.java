@@ -88,4 +88,13 @@ public class UsuarioService {
         usuarioResponseDto.setArticulos(responseArticuloDtos);
         return usuarioResponseDto;
     }
+
+    public List<UsuarioResponseDto> findByNombre(String nombre) {
+        List<UsuarioEntity> usuarios = usuarioRepository.findByNombre(nombre);
+        return usuarios.stream().map(usuario -> {
+            UsuarioResponseDto dto = new UsuarioResponseDto();
+            modelMapper.map(usuario, dto);
+            return dto;
+        }).toList();
+    }
 }

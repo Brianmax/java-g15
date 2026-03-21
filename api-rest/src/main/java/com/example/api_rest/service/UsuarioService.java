@@ -6,14 +6,13 @@ import com.example.api_rest.dto.response.ResponseArticuloDto;
 import com.example.api_rest.dto.response.UsuarioResponseDto;
 import com.example.api_rest.entity.ArticuloEntity;
 import com.example.api_rest.entity.UsuarioEntity;
-import com.example.api_rest.exception.ExternalResourceException;
+import com.example.api_rest.exception.ExternalServiceException;
 import com.example.api_rest.exception.ResourceNotFoundException;
 import com.example.api_rest.feignClient.ReniecClient;
 import com.example.api_rest.repository.UsuarioRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.resource.ResourceUrlProvider;
 
 import java.util.*;
 
@@ -39,7 +38,13 @@ public class UsuarioService {
         if(dni.length() != 8 || !dni.matches("^\\d+$")) {
             return null;
         }
-        ReniecResponse response = reniecClient.getPersonaInfo(dni, apiToken);
+        ReniecResponse response = null;
+        try {
+            response = reniecClient.getPersonaInfo(dni, apiToken);
+        } catch (Exception ex) {
+            throw new ExternalServiceException(ex.getMessage(), ex);
+        }
+
 
         String username = response
                 .getFirstName()

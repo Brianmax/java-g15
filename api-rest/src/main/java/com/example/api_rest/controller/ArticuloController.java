@@ -24,4 +24,5 @@ public class ArticuloController {
     }
 
     // implementar la busqueda por id de un articulo
+    // implementar el resource not found para este endpoint
 }

@@ -14,4 +14,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ApiResponse<>(false, ex.getMessage(), null));
     }
+
+    @ExceptionHandler(ExternalServiceException.class)
+    public ResponseEntity<ApiResponse<Void>> handleExternalServiceException(ExternalServiceException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_GATEWAY) // significa servicio externo fallo
+                .body(new ApiResponse<>(false, ex.getMessage(), null));
+    }
 }

@@ -4,6 +4,7 @@ import com.example.api_rest.dto.request.UsuarioCreateDto;
 import com.example.api_rest.dto.response.ApiResponse;
 import com.example.api_rest.dto.response.UsuarioResponseDto;
 import com.example.api_rest.service.UsuarioService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,14 +21,17 @@ public class UsuarioController {
     }
 
     @PostMapping("/save")
-    public UsuarioResponseDto saveUsuario(@RequestBody UsuarioCreateDto usuarioCreateDto) {
-        return usuarioService.saveUsuario(usuarioCreateDto);
+    public ResponseEntity<ApiResponse<UsuarioResponseDto>> saveUsuario(@RequestBody UsuarioCreateDto usuarioCreateDto) {
+        UsuarioResponseDto usuarioResponse = usuarioService.saveUsuario(usuarioCreateDto);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new ApiResponse<>(true, "Usuario Creado", usuarioResponse));
     }
 
     @GetMapping("/find/{id}")
     public ResponseEntity<ApiResponse<UsuarioResponseDto>> findById(@PathVariable UUID id) {
         UsuarioResponseDto response = usuarioService.findById(id);
-        return ResponseEntity.ok(new ApiResponse<UsuarioResponseDto>(true, "Usuario encontrado", response));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ApiResponse<>(true, "Usuario encontrado", response));
     }
 
     // buscar usuarios por id

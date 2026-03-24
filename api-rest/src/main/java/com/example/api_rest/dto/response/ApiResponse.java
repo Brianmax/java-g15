@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,4 +16,5 @@ public class ApiResponse<T> { // Body General
     private boolean success; // true o false
     private String message; // resumen de los errores si es que existen
     private T data; // null si es que no hay informacion que retornar
+//    private List<String> errors;
 }

@@ -4,9 +4,9 @@ import com.example.api_rest.dto.request.UsuarioCreateDto;
 import com.example.api_rest.dto.response.ApiResponse;
 import com.example.api_rest.dto.response.UsuarioResponseDto;
 import com.example.api_rest.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<ApiResponse<UsuarioResponseDto>> saveUsuario(@RequestBody UsuarioCreateDto usuarioCreateDto) {
+    public ResponseEntity<ApiResponse<UsuarioResponseDto>> saveUsuario(@Valid @RequestBody UsuarioCreateDto usuarioCreateDto) {
         UsuarioResponseDto usuarioResponse = usuarioService.saveUsuario(usuarioCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new ApiResponse<>(true, "Usuario Creado", usuarioResponse));

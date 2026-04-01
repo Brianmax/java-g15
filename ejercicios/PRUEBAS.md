@@ -128,7 +128,7 @@ curl -X POST http://localhost:8080/api/v1/propietario/save \
   }'
 ```
 
-**Response esperado — HTTP 404:**
+**Response esperado — HTTP 409:**
 ```json
 {
   "success": false,
@@ -643,7 +643,7 @@ curl -X GET http://localhost:8080/api/v1/propietario/find/<id-propietario-1>
 | Caso | Endpoint | Obligatorio | Lo que se evalúa |
 |------|----------|:-----------:|------------------|
 | 1.1 – 1.3 | `POST /propietario/save` | ✅ | Feign RENIEC setea nombres/apellidos, HTTP 201 |
-| 1.4 | `POST /propietario/save` | ✅ | Detección de email duplicado, HTTP 404 |
+| 1.4 | `POST /propietario/save` | ✅ | Detección de email duplicado, HTTP 409 |
 | 1.5 | `POST /propietario/save` | ⚠️ opcional | HTTP 400 (desglose por campo es plus) |
 | 2.1 | `GET /propietario/find/{id}` | ✅ | Propietario encontrado con lista de mascotas |
 | 2.2 | `GET /propietario/find/{id}` | ✅ | HTTP 404 con mensaje correcto |

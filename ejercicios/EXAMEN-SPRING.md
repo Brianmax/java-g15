@@ -33,6 +33,8 @@ Vas a construir una API REST para gestionar una **clínica veterinaria**. El sis
 - `dni` (String, 8 dígitos)
 - `direccion` (String)
 - `fechaRegistro` (Date, por defecto fecha actual)
+- `createdAt` (fecha y hora de creación, se asigna automáticamente en el servidor)
+- `updatedAt` (fecha y hora de última modificación, se actualiza automáticamente en el servidor)
 - Relación: un propietario puede tener **muchas mascotas** (`@OneToMany`)
 
 **Mascota**
@@ -43,6 +45,8 @@ Vas a construir una API REST para gestionar una **clínica veterinaria**. El sis
 - `fechaNacimiento` (Date)
 - `peso` (Double)
 - `fechaRegistro` (Date, por defecto fecha actual)
+- `createdAt` (fecha y hora de creación, se asigna automáticamente en el servidor)
+- `updatedAt` (fecha y hora de última modificación, se actualiza automáticamente en el servidor)
 - Relación: una mascota pertenece a **un propietario** (`@ManyToOne`)
 - Relación: una mascota puede tener **muchas vacunas** (`@ManyToMany`)
 
@@ -52,6 +56,8 @@ Vas a construir una API REST para gestionar una **clínica veterinaria**. El sis
 - `descripcion` (String)
 - `laboratorio` (String)
 - `dosis` (int)
+- `createdAt` (fecha y hora de creación, se asigna automáticamente en el servidor)
+- `updatedAt` (fecha y hora de última modificación, se actualiza automáticamente en el servidor)
 - Relación: una vacuna puede aplicarse a **muchas mascotas** (`@ManyToMany`)
 
 ---

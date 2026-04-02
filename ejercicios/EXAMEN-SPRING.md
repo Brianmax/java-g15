@@ -226,6 +226,14 @@ Implementa un `GlobalExceptionHandler` con `@RestControllerAdvice` que maneje:
 2. **`ResourceNotFoundException`** → HTTP **404 Not Found**
    - Retorna `ApiResponse<Void>` con `success = false` y el mensaje de la excepción.
 
+3. **`DuplicateResourceException`** → HTTP **409 Conflict**
+   - Retorna `ApiResponse<Void>` con `success = false` y el mensaje de la excepción.
+   - Lánzala cuando se intente registrar un propietario con un email ya existente.
+
+4. **`ExternalServiceException`** → HTTP **502 Bad Gateway**
+   - Retorna `ApiResponse<Void>` con `success = false` y el mensaje de la excepción.
+   - Lánzala cuando la llamada al servicio externo de RENIEC falle.
+
 **Criterios de evaluación:**
 - Manejo de errores de validación retornando HTTP 400 (3 pts)
 - Agrupación de errores por campo en `Map<String, List<String>>` (opcional, 2 pts)

@@ -12,6 +12,9 @@ Repositorio de aprendizaje de Java organizado por proyectos temáticos.
 | [ejercicios](./ejercicios) | Ejercicios prácticos por tema | Variables, Condicionales, Arrays, Loops, Clases |
 | [bases-datos](./bases-datos) | Consultas y diseño de bases de datos | PostgreSQL, Relaciones, Foreign Keys, JOINs, MongoDB, Aggregations, Operadores |
 | [api-rest](./api-rest) | API REST con Spring Boot | Spring Boot, Spring Data JPA, PostgreSQL, DTOs, Feign Client, Exception Handling, ModelMapper, RENIEC |
+| [biblioteca](./biblioteca) | API REST con pruebas unitarias | Spring Boot, JPA, PostgreSQL, ModelMapper, JUnit 5, Mockito |
+| [hexagonal](./hexagonal) | Arquitectura Hexagonal con Spring Boot | Ports & Adapters, Domain Model, Use Cases, JPA Persistence Adapter |
+| [security-g15](./security-g15) | Seguridad con Spring Security y JWT | JWT, BCrypt, Roles, Stateless Sessions, Spring Security Filter Chain |
 
 ---
 
@@ -156,5 +159,78 @@ API REST construida con Spring Boot para gestión de usuarios, artículos y cate
 - **Diseño REST**
   - Respuesta genérica `ApiResponse<T>`
   - Códigos HTTP apropiados por operación
+
+---
+
+### biblioteca
+
+API REST de ejemplo para gestión de libros, autores y categorías, con énfasis en pruebas unitarias.
+
+**Temas incluidos:**
+
+- **Spring Boot + JPA**
+  - Entidades: `AutorEntity`, `LibroEntity`, `CategoriaEntity`
+  - Relaciones: `@ManyToOne`, `@ManyToMany`
+  - Validaciones con `@Valid`, `@NotBlank`, `@Email`
+
+- **Pruebas Unitarias**
+  - JUnit 5 + Mockito
+  - Uso de `@Mock`, `@InjectMocks` y `@Spy`
+  - Tests para servicios: `AutorService`, `LibroService`
+
+- **Endpoints**
+  - `/api/v1/autores` — CRUD de autores
+  - `/api/v1/libros` — CRUD de libros con validación de autor
+  - `/api/v1/categorias` — CRUD de categorías
+
+---
+
+### hexagonal
+
+Implementación de Arquitectura Hexagonal (Ports & Adapters) con Spring Boot aplicada a gestión de productos.
+
+**Temas incluidos:**
+
+- **Domain Layer**
+  - Modelo de dominio: `Product`
+  - Puertos de entrada (`ProductUseCase`) y salida (`ProductPort`)
+  - Excepción de dominio: `ProductNotFoundException`
+
+- **Application Layer**
+  - Caso de uso: `ProductService` implementa `ProductUseCase`
+
+- **Infrastructure Layer**
+  - Adaptador de persistencia: `ProductPersistenceAdapter` implementa `ProductPort`
+  - Entidad JPA: `ProductJpaEntity`
+  - Controlador REST: `ProductController`
+  - DTOs: `ProductRequest`, `ProductResponse`
+  - Manejo global de excepciones: `GlobalExceptionHandler`
+
+---
+
+### security-g15
+
+API REST con autenticación y autorización usando Spring Security y JWT.
+
+**Temas incluidos:**
+
+- **Spring Security**
+  - Configuración stateless con `SecurityFilterChain`
+  - `DaoAuthenticationProvider` con `BCryptPasswordEncoder`
+  - Rutas públicas (`/auth/login`, `/auth/register`) y protegidas
+
+- **JWT (JSON Web Tokens)**
+  - Generación y validación de tokens en `JwtService`
+  - Filtro de autenticación: `JwtFilter`
+
+- **Roles y Usuarios**
+  - Entidades: `UserEntity`, `RoleEntity` con enum `Role`
+  - `UserDetailsServiceImpl` para carga de usuarios
+  - Endpoints: `AuthController`, `UserController`, `ProductController`
+
+- **DTOs**
+  - `LoginRequest`, `RegisterRequest`, `AuthResponse`
+  - `UserResponse`, `UpdateUserRequest`
+  - `ProductRequest`, `ProductResponse`
 
 ---

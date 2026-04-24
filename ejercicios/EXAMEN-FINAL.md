@@ -512,42 +512,6 @@ Los clientes externos solo interactúan con el sistema a través del API Gateway
 
 ---
 
-## PREGUNTAS CONCEPTUALES (10 puntos)
-
-> Responde cada pregunta en **máximo 4 oraciones** con tus propias palabras. Incluye las respuestas en `RESPUESTAS-CONCEPTUALES.md` en la raíz del repositorio.
-
----
-
-**Pregunta 1 — Service Discovery (2 puntos)**
-
-¿Por qué un microservicio no debería conectarse a otro usando una dirección IP o puerto hardcodeado? Explica cómo Eureka resuelve este problema y qué ocurre automáticamente cuando una instancia deja de responder al heartbeat.
-
----
-
-**Pregunta 2 — API Gateway vs. Load Balancer (2 puntos)**
-
-¿Cuál es la diferencia principal entre un API Gateway y un load balancer de red tradicional? Da un ejemplo concreto de algo que un API Gateway puede hacer y que un load balancer de red no puede realizar por sí solo.
-
----
-
-**Pregunta 3 — Estados del Circuit Breaker (2 puntos)**
-
-Describe los tres estados de un Circuit Breaker (Closed, Open, Half-Open) y explica qué evento concreto provoca la transición entre cada par de estados. ¿Por qué el estado Half-Open es necesario y qué problema evitaría si no existiera?
-
----
-
-**Pregunta 4 — Config Server vs. Vault (2 puntos)**
-
-Tienes dos valores: la URL de conexión a tu base de datos y la contraseña de esa base de datos. ¿Cuál pondrías en el Config Server y cuál en Vault? Justifica por qué no es recomendable almacenar ambos en el mismo lugar.
-
----
-
-**Pregunta 5 — Consistencia eventual vs. consistencia fuerte (2 puntos)**
-
-En RapidoCourier, cuando el estado de un paquete cambia a "entregado", el servicio de facturación debe ser notificado. ¿Qué problema concreto ocurre si usas Feign para esta notificación y el servicio de facturación no está disponible en ese momento? ¿Qué ventaja ofrece la comunicación asincrónica por eventos aunque ambos servicios puedan quedar momentáneamente inconsistentes?
-
----
-
 ## APÉNDICE — CASOS DE PRUEBA
 
 > Todos los `curl` van dirigidos al **API Gateway** (`localhost:8080`), nunca directamente a los microservicios. Adapta las rutas al diseño que hayas implementado; si cambias alguna ruta, documéntala en el `README.md`. Reemplaza `TOKEN` por el JWT obtenido en el caso de login. Reemplaza `{id}` por el UUID real del recurso.

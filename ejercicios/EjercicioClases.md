@@ -47,7 +47,7 @@ Este ejercicio tiene como objetivo desarrollar un sistema de biblioteca simple q
 
 ## Clases
 
-### `LibraryItem` (ElementoBiblioteca)
+### `LibraryItem` (ElementoBiblioteca) (abstract class)
 - **Descripción**: Clase base para ítems en la biblioteca.
 - **Atributos privados**:
     - `title`: Título del ítem.
@@ -88,6 +88,7 @@ Este ejercicio tiene como objetivo desarrollar un sistema de biblioteca simple q
 - **Descripción**: Gestiona la colección de ítems de la biblioteca.
 - **Atributos**:
     - `libraryItems`: Colección de `LibraryItems`.
+    - `libraryUsers`: Colección de `LibraryUser`.
 - **Métodos**:
     - `addItem()`: Añadir nuevos ítems a la biblioteca.
     - `showAllItems()`: Mostrar todos los ítems de la biblioteca.
